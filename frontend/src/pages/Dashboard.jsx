@@ -24,7 +24,7 @@ export default function Dashboard({ user }) {
   // Create task
   const create = async (title, description) => {
     try {
-      const { data } = await api.post(`${API_BASE}/tasks`, { title, description }, {
+      const { data } = await api.post('/tasks', { title, description }, {
         withCredentials: true,
       })
       setTasks(prev => [data, ...prev])
@@ -36,7 +36,7 @@ export default function Dashboard({ user }) {
   // Update task
   const update = async (id, title, description) => {
     try {
-      const { data } = await api.put(`${API_BASE}/tasks/${id}`, { title, description }, {
+      const { data } = await api.put('/tasks/${id}', { title, description }, {
         withCredentials: true,
       })
       setTasks(prev => prev.map(t => (t._id === id ? data : t)))
@@ -48,7 +48,7 @@ export default function Dashboard({ user }) {
   // Delete task
   const remove = async (id) => {
     try {
-      await api.delete(`${API_BASE}/tasks/${id}`, {
+      await api.delete('/tasks/${id}', {
         withCredentials: true,
       })
       setTasks(prev => prev.filter(t => t._id !== id))
