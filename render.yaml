@@ -3,23 +3,25 @@ services:
     name: mern-backend
     env: node
     plan: free
-    buildCommand: "cd backend && npm install"
-    startCommand: "cd backend && npm start"
+    rootDir: backend
+    buildCommand: "npm install"
+    startCommand: "npm start"
     envVars:
       - key: PORT
         value: 10000
       - key: MONGO_URI
-        sync: false
+        sync: false        
       - key: JWT_SECRET
-        sync: false
+        sync: false       
       - key: CLIENT_URL
-        value: "https://your-frontend.onrender.com"
+        value: https://mern-frontend.onrender.com   
 
   - type: web
     name: mern-frontend
-    env: node
-    buildCommand: "cd frontend && npm install && npm run build"
-    staticPublishPath: frontend/dist
+    env: static
+    rootDir: frontend
+    buildCommand: "npm install && npm run build"
+    staticPublishPath: dist
     envVars:
       - key: VITE_API_URL
-        value: "https://your-backend.onrender.com"
+        value: https://mern-backend.onrender.com   
