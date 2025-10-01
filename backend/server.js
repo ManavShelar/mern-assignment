@@ -14,35 +14,33 @@ connectDB();
 
 const app = express();
 
+// __dirname for ES modules
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.resolve();
+const __dirname = path.dirname(__filename);
 
-const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:5173";
-app.use(cors({
-  origin: CLIENT_URL,
-  credentials: true,
-}));
-
+// Middleware
+app.use(cors()); // No CLIENT_URL needed if same domain
 app.use(express.json());
 app.use(cookieParser());
 
-// Routes
+// API routes
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/tasks", taskRoutes);
 
+// Serve frontend (React) in production
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../frontend/dist"))); 
+  app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
-  app.get("/*splat", (req, res) =>
-    res.sendFile(path.resolve(__dirname, "../frontend/dist" ,"index.html"))
-  );
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "../frontend/dist", "index.html"));
+  });
+} else {
+  app.get("/", (req, res) => {
+    res.send("✅ Backend API is running (dev mode)");
+  });
 }
 
-app.get("/", (req, res) => {
-  res.send(" Backend API is running");
-});
-
-
+// Error handling
 app.use(notFound);
 app.use(errorHandler);
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import api from "../api/axios";
 import { API_BASE } from '../App'
 import TaskForm from '../components/Taskform.jsx'
 
@@ -10,7 +10,7 @@ export default function Dashboard({ user }) {
   // Fetch tasks
   const fetchTasks = async () => {
     try {
-      const { data } = await axios.get(`${API_BASE}/tasks`, {
+      const { data } = await api.get(`${API_BASE}/tasks`, {
         withCredentials: true,
       })
       setTasks(data)
@@ -24,7 +24,7 @@ export default function Dashboard({ user }) {
   // Create task
   const create = async (title, description) => {
     try {
-      const { data } = await axios.post(`${API_BASE}/tasks`, { title, description }, {
+      const { data } = await api.post(`${API_BASE}/tasks`, { title, description }, {
         withCredentials: true,
       })
       setTasks(prev => [data, ...prev])
@@ -36,7 +36,7 @@ export default function Dashboard({ user }) {
   // Update task
   const update = async (id, title, description) => {
     try {
-      const { data } = await axios.put(`${API_BASE}/tasks/${id}`, { title, description }, {
+      const { data } = await api.put(`${API_BASE}/tasks/${id}`, { title, description }, {
         withCredentials: true,
       })
       setTasks(prev => prev.map(t => (t._id === id ? data : t)))
@@ -48,7 +48,7 @@ export default function Dashboard({ user }) {
   // Delete task
   const remove = async (id) => {
     try {
-      await axios.delete(`${API_BASE}/tasks/${id}`, {
+      await api.delete(`${API_BASE}/tasks/${id}`, {
         withCredentials: true,
       })
       setTasks(prev => prev.filter(t => t._id !== id))
