@@ -43,7 +43,7 @@ CLIENT_URL=http://localhost:5173
 
 ### Frontend (`/frontend/.env`)
 
-VITE_API_URL=http://localhost:5000
+VITE_API_BASE=http://localhost:5000
 
 ## 🖥 Local Development
 ```
@@ -84,7 +84,7 @@ npm run dev
 - Publish Directory: `frontend/dist`  
 - Env Vars:
 
-  VITE_API_URL=https://your-backend.onrender.com
+  VITE_API_BASE=https://your-backend.onrender.com
 
 ## 📄 API Endpoints
 
