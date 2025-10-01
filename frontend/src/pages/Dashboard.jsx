@@ -10,7 +10,7 @@ export default function Dashboard({ user }) {
   // Fetch tasks
   const fetchTasks = async () => {
     try {
-      const { data } = await api.get(`${API_BASE}/tasks`, {
+      const { data } = await api.get('/tasks', {
         withCredentials: true,
       })
       setTasks(data)

@@ -27,7 +27,7 @@ export default function Login({ setUser }) {
 
     try {
       const { data } = await api.post(
-        `${API_BASE}/auth/login`,
+        '/auth/login',
         { email, password },
         { withCredentials: true }
       );

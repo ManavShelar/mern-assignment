@@ -8,7 +8,7 @@ export default function Admin({ user }) {
 
   const fetchUsers = async () => {
     try {
-      const { data } = await api.get(`${API_BASE}/auth/users`, {
+      const { data } = await api.get('/auth/users', {
         withCredentials: true, 
       });
       setUsers(data.filter((u) => u._id !== user._id));
@@ -20,7 +20,7 @@ export default function Admin({ user }) {
   const deleteUser = async (id) => {
     if (!window.confirm("Are you sure you want to delete this user?")) return;
     try {
-      await api.delete(`${API_BASE}/auth/users/${id}`, {
+      await api.delete('/auth/users/${id}', {
         withCredentials: true,
       });
       setUsers((prev) => prev.filter((u) => u._id !== id));

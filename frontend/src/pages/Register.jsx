@@ -32,8 +32,7 @@ export default function Register({ setUser }) {
     }
 
     try {
-      const { data } = await api.post(
-        `${API_BASE}/auth/register`,
+      const { data } = await api.post("/auth/register",
         { name, email, password, role },
         { withCredentials: true }
       )
