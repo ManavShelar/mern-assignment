@@ -20,7 +20,7 @@ export default function Admin({ user }) {
   const deleteUser = async (id) => {
     if (!window.confirm("Are you sure you want to delete this user?")) return;
     try {
-      await api.delete('/auth/users/${id}', {
+      await api.delete(`/auth/users/${id}`, {
         withCredentials: true,
       });
       setUsers((prev) => prev.filter((u) => u._id !== id));
